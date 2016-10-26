@@ -1,0 +1,103 @@
+<!-- app/back-end/views/index.html -->
+<!doctype html>
+<html lang="en" ng-app="myQuotesApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Docplexus Quotes</title>
+</head>
+
+<body ng-controller="MyQuotesController as vm">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#">Logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4" ng-repeat="quote in vm.quotes track by quote.id">
+				<div class="panel panel-info no-border-radius">
+					<label style="padding:10px;" class="btn-info no-border-radius pull-left"><span class="glyphicon glyphicon-user"></span></label>
+					<button type="button" style="padding:9px;" class="btn btn-info no-border-radius pull-right" ng-click="quote.viewAuthorDetails = !quote.viewAuthorDetails"><span class="glyphicon glyphicon-info-sign"></span></button>
+
+					<div class="panel-heading text-center" ng-bind="quote.author.name">
+					</div>
+					<div class="panel-body">
+						<div uib-collapse="!quote.viewAuthorDetails">
+							<div class="container">
+								<div class="row">							
+
+									<div class="span2">
+										<!--<img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg" alt="" class="img-rounded">-->
+									</div>
+									<div class="span4">
+										<blockquote>
+											<p ng-bind="quote.author.name"></p>
+											<small><cite ng-bind="quote.author.profession"></cite></small>
+											<small><cite ng-bind="quote.author.born"></cite></small>
+											<small><cite ng-bind="quote.author.died"></cite></small>
+										</blockquote>
+										<p class="well"style="width:330px;" ng-bind="quote.author.intro"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="thumbnail margin-bottom-0 no-border-radius">
+							<img src="../images/paris.jpg" alt="Cinque Terre">
+							<div class="caption">
+								<h3 style="text-transform: capitalize"><span class="glyphicon glyphicon-tags"></span>&nbsp;{{quote.topics.join(', ')}}</h3>
+								<p ng-bind="quote.quote"></p>
+							</div>
+						</div>
+						<!--<p ng-bind="quote.quote" ></p>-->
+					</div>
+					<div class="panel-footer no-padding no-border-radius">
+						<div class="btn-group ">
+							<label class="btn btn-info no-border-radius width-120" ng-model="checkModel.left" uib-btn-checkbox><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<span class="badge" ng-bind="quote.likeCount"></span></label>
+							<label class="btn btn-info no-border-radius width-120" ng-model="checkModel.middle" uib-btn-checkbox><span class="glyphicon glyphicon-share-alt"></span>&nbsp;<span class="badge" ng-bind="quote.shareCount"></span></label>
+							<label class="btn btn-info no-border-radius width-120" ng-model="checkModel.right" uib-btn-checkbox><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="badge" ng-bind="quote.viewCount"></span></label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><br><br>
+
+	<footer class="container-fluid text-center">
+		<p>Docplexus Copyright</p>
+		<!--<form class="form-inline">Get deals:
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+  </form>-->
+	</footer>
+
+</body>
+<!--Scripts-Lib-Section-->
+<script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+<script type="text/javascript" src="../libs/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="../libs/angular-ui-bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
+
+<!--Scripts-app-Section-->
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="../app/services/data-access-service.js"></script>
+<script type="text/javascript" src="../app/controllers/my-quotes-ctrl.js"></script>
+
+<link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+<link rel="stylesheet" href="../css/app.css">
+
+</html>
